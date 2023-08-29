@@ -1,0 +1,4 @@
+{
+  "prettier.useTabs": false,
+  "reactSnippets.settings.prettierEnabled": true
+}
