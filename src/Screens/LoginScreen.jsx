@@ -17,7 +17,7 @@ export default function LoginScreen() {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
-        keyboardVerticalOffset={-220}
+        keyboardVerticalOffset={-250}
       >
         <View style={styles.bg}>
           <ImageBackground
