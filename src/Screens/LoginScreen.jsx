@@ -13,22 +13,24 @@ import bg from '../../assets/img/AuthBg.jpg';
 
 export default function LoginScreen() {
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-        keyboardVerticalOffset={-250}
-      >
-        <View style={styles.bg}>
-          <ImageBackground
-            source={bg}
-            style={styles.bg}
-          >
-            <LoginForm />
-          </ImageBackground>
-        </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    <>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}
+          keyboardVerticalOffset={-250}
+        >
+          <View style={styles.bg}>
+            <ImageBackground
+              source={bg}
+              style={styles.bg}
+            >
+              <LoginForm />
+            </ImageBackground>
+          </View>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </>
   );
 }
 

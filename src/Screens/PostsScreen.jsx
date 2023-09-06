@@ -1,10 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import UserWrapper from '../components/UserWrapper';
+import userAvatar from '../../assets/img/avatar.jpg';
 
 export default function PostsScreen() {
   return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
-      <Text>PostsScreen</Text>
+    <View style={styles.container}>
+      <UserWrapper
+        userAvatar={userAvatar}
+        userName='Natali Romanova'
+        userEmail='email@example.com'
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    flex: 1,
+    padding: 16,
+  },
+});
