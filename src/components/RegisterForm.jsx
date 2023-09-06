@@ -5,10 +5,13 @@ import AuthTitleTitle from './AuthTitle';
 import AuthInput from './AuthInput';
 import AuthButton from './AuthButton';
 import Avatar from './Avatar';
+import { useNavigation } from '@react-navigation/native';
 
 const initialValues = { name: '', email: '', password: '' };
 
 export default function RegisterForm() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Avatar />
@@ -41,16 +44,15 @@ export default function RegisterForm() {
               handleChangeText={handleChange('password')}
             />
             <AuthButton
-              text='Увійти'
+              text='Зареєструватися'
               onPress={handleSubmit}
             />
           </View>
         )}
       </Formik>
       <View style={styles.loginInfoWrapper}>
-        <Text style={styles.loginInfoText}>Немає акаунту?</Text>
-        <TouchableOpacity>
-          <Text style={styles.registerText}> Зареєструватися</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.loginInfoText}>Вже є акаунт? Увійти</Text>
         </TouchableOpacity>
       </View>
     </View>

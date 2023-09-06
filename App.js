@@ -1,11 +1,16 @@
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, View } from 'react-native';
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import LoginScreen from './src/Screens/LoginScreen';
 import RegistrationScreen from './src/Screens/RegistrationScreen';
+import PostsScreen from './src/Screens/PostsScreen';
 
 SplashScreen.preventAutoHideAsync();
+const MainStack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,13 +30,30 @@ export default function App() {
   }
 
   return (
-    <View
-      onLayout={onLayoutRootView}
-      style={styles}
-    >
-      <LoginScreen />
-      {/* <RegistrationScreen /> */}
-    </View>
+    <NavigationContainer onLayout={onLayoutRootView}>
+      <MainStack.Navigator initialRouteName='Login'>
+        <MainStack.Screen
+          name='Home'
+          component={PostsScreen}
+        />
+        <MainStack.Screen
+          name='Register'
+          component={RegistrationScreen}
+        />
+        <MainStack.Screen
+          name='Login'
+          component={LoginScreen}
+        />
+      </MainStack.Navigator>
+    </NavigationContainer>
+    // <View
+    //   onLayout={onLayoutRootView}
+    //   style={styles}
+    // >
+    /* <PostsScreen /> */
+    /* <LoginScreen /> */
+    /* <RegistrationScreen /> */
+    // </View>
   );
 }
 

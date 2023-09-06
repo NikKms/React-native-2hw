@@ -4,10 +4,13 @@ import { Formik } from 'formik';
 import AuthTitleTitle from './AuthTitle';
 import AuthInput from './AuthInput';
 import AuthButton from './AuthButton';
+import { useNavigation } from '@react-navigation/native';
 
 const initialValues = { email: '', password: '' };
 
 export default function LoginForm() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <AuthTitleTitle text='Увійти' />
@@ -40,9 +43,10 @@ export default function LoginForm() {
         )}
       </Formik>
       <View style={styles.loginInfoWrapper}>
-        <Text style={styles.loginInfoText}>Немає акаунту?</Text>
-        <TouchableOpacity>
-          <Text style={styles.registerText}> Зареєструватися</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <Text style={styles.loginInfoText}>
+            Немає акаунту? Зареєструватися
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
