@@ -9,7 +9,7 @@ export default function AuthButton({ text, onPress }) {
     <TouchableOpacity
       onPress={() => {
         onPress();
-        navigation.navigate('AuthorizedNavTab');
+        navigation.navigate('Home');
       }}
       style={styles.btn}
     >

@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthNav from './AuthNav';
-import AuthorizedNavTab from './AuthorizedNavTab';
+import MainTabs from './MainTabs';
 
 const MainStack = createStackNavigator();
 
@@ -16,9 +16,9 @@ export default function Nav() {
           component={AuthNav}
         />
         <MainStack.Screen
-          name='AuthorizedNavTab'
+          name='Home'
           options={{ headerShown: false }}
-          component={AuthorizedNavTab}
+          component={MainTabs}
         />
       </MainStack.Navigator>
     </NavigationContainer>
