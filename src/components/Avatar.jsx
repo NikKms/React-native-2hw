@@ -3,8 +3,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import ava from '../../assets/img/avatar.jpg';
 
-export default function Avatar() {
-  const [avatar, setAvatar] = useState(null);
+export default function Avatar({ avatarProfile }) {
+  const [avatar, setAvatar] = useState(null || avatarProfile);
 
   const toggleAddAva = () => {
     setAvatar(prevAvatar => (prevAvatar ? null : ava));

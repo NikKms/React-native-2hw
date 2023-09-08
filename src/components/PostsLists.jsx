@@ -1,12 +1,12 @@
 import React from 'react';
 import PostsItem from './PostsItem';
-import { View } from 'react-native';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 export default function PostsLists() {
   return (
-    <View>
+    <ScrollView>
       {/* qqq.map(()=>) */}
       <PostsItem />
-    </View>
+    </ScrollView>
   );
 }
