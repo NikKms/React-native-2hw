@@ -1,13 +1,17 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
-import postPhoto from '../../assets/img/postPhoto.jpg';
 
-export default function PostsItem({ countComents = 0, countLikes, likes }) {
+export default function PostsItem({
+  countComents = 0,
+  countLikes,
+  likes,
+  photo,
+}) {
   return (
     <View style={styles.container}>
       <Image
-        source={postPhoto}
+        source={photo}
         style={styles.image}
       />
       <Text style={styles.text}>Post Name</Text>

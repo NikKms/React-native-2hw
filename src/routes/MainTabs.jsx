@@ -80,6 +80,8 @@ export default function MainTabs() {
         options={{
           title: 'Створити публікацію',
           headerTitleAlign: 'center',
+          tabBarStyle: { display: 'none' },
+          unmountOnBlur: true,
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => navigation.goBack()}

@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  FlatList,
+  ImageBackground,
 } from 'react-native';
 import bg from '../../assets/img/AuthBg.jpg';
-import RegisterForm from '../components/RegisterForm';
 import Profile from '../components/Profile';
 
-export default function RegistrationScreen() {
+export default function ProfileScreen() {
   return (
     <>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -21,14 +21,19 @@ export default function RegistrationScreen() {
           style={styles.container}
           keyboardVerticalOffset={-190}
         >
-          <View style={styles.bg}>
-            <ImageBackground
-              source={bg}
-              style={styles.bg}
-            >
-              <Profile />
-            </ImageBackground>
-          </View>
+          <FlatList
+            data={[{ key: 'profile' }]}
+            renderItem={({ item }) => (
+              <View style={styles.bg}>
+                <ImageBackground
+                  source={bg}
+                  style={styles.imageBackground}
+                >
+                  <Profile />
+                </ImageBackground>
+              </View>
+            )}
+          />
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </>
@@ -39,8 +44,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   bg: {
+    flex: 1,
+  },
+  imageBackground: {
     flex: 1,
     justifyContent: 'flex-end',
   },
