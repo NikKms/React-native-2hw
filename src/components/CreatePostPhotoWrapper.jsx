@@ -11,7 +11,6 @@ import {
 import uplPhoto from '../../assets/img/postPhoto.jpg';
 
 const screenHeight = Dimensions.get('window').height;
-const baseFontSize = 16;
 
 export default function CreatePostPhotoWrapper({
   handleUploadPhoto,
@@ -24,18 +23,16 @@ export default function CreatePostPhotoWrapper({
           <View style={styles.bgIcon}>
             <MaterialIcons
               name='photo-camera'
-              size={baseFontSize * 1.5}
+              size={24}
               color={uploadPhoto ? '#FFFFFF' : '#BDBDBD'}
             />
           </View>
-          <View>
-            {uploadPhoto && (
-              <Image
-                source={uploadPhoto}
-                style={styles.image}
-              />
-            )}
-          </View>
+          {uploadPhoto && (
+            <Image
+              source={uploadPhoto}
+              style={styles.image}
+            />
+          )}
         </View>
         <View style={{ backgroundColor: '#ffffff' }}>
           <Text style={{ color: '#BDBDBD' }}>
@@ -53,15 +50,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 8,
     backgroundColor: '#E8E8E8',
+    alignItems: 'center',
+    justifyContent: 'center',
     overflow: 'hidden',
   },
   bgIcon: {
-    position: 'absolute',
-    top: screenHeight * 0.12,
-    left: '50%',
-    marginLeft: -baseFontSize * 1.5,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
     backgroundColor: 'rgba(255, 255, 255, 0.35)',
     height: 60,
     width: 60,

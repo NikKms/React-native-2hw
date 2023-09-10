@@ -26,6 +26,7 @@ export default function PostsList() {
     <FlatList
       data={data}
       keyExtractor={item => item.id.toString()}
+      showsVerticalScrollIndicator={false}
       renderItem={({ item }) => (
         <PostsItem
           countComents={item.countComents}

@@ -23,6 +23,7 @@ export default function ProfileScreen() {
         >
           <FlatList
             data={[{ key: 'profile' }]}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <View style={styles.bg}>
                 <ImageBackground
