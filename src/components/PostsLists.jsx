@@ -1,26 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import PostsItem from './PostsItem';
-import postPhoto from '../../assets/img/postPhoto.jpg';
-import postPhoto2 from '../../assets/img/photo2.jpg';
+import { data } from '../common/data';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PostsList() {
-  const data = [
-    {
-      id: 1,
-      photo: postPhoto,
-      countComents: 5,
-      countLikes: 10,
-      likes: true,
-    },
-    {
-      id: 2,
-      photo: postPhoto2,
-      countComents: 3,
-      countLikes: 7,
-      likes: false,
-    },
-  ];
+  const navigation = useNavigation();
 
   return (
     <FlatList
@@ -33,6 +18,14 @@ export default function PostsList() {
           countLikes={item.countLikes}
           likes={item.likes}
           photo={item.photo}
+          location={item.location}
+          postName={item.postName}
+          toComments={() => {
+            navigation.navigate('Comment');
+          }}
+          toMap={() => {
+            navigation.navigate('Map');
+          }}
         />
       )}
     />

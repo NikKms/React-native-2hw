@@ -10,7 +10,13 @@ import {
   SimpleLineIcons,
   Ionicons,
 } from '@expo/vector-icons';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Tabs = createBottomTabNavigator();
@@ -50,7 +56,8 @@ export default function MainTabs() {
         tabBarLabel: '',
         tabBarStyle: {
           paddingVertical: 9,
-          height: screenHeight * 0.085,
+          height:
+            Platform.OS === 'ios' ? screenHeight * 0.12 : screenHeight * 0.085,
         },
       })}
     >

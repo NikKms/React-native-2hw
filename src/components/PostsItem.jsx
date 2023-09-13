@@ -1,24 +1,29 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PostsItem({
   countComents = 0,
   countLikes,
   likes,
   photo,
+  location,
+  postName,
+  toComments,
+  toMap,
 }) {
   return (
     <View style={styles.container}>
       <Image
-        source={photo}
+        source={photo} /*source={{uri:photo}}*/
         style={styles.image}
       />
-      <Text style={styles.text}>Post Name</Text>
+      <Text style={[styles.text, {}]}>{postName}</Text>
       <View style={styles.infoList}>
         <View style={styles.activityInfo}>
-          <View style={styles.infoItem}>
-            <TouchableOpacity>
+          <TouchableOpacity onPress={toComments}>
+            <View style={styles.infoItem}>
               <Feather
                 name='message-circle'
                 size={24}
@@ -27,13 +32,13 @@ export default function PostsItem({
                   '#535352d2'
                 }
               />
-            </TouchableOpacity>
-            <Text>{countComents}</Text>
-          </View>
-          <View style={styles.infoItem}>
-            {likes && (
-              <>
-                <TouchableOpacity>
+              <Text>{countComents}</Text>
+            </View>
+          </TouchableOpacity>
+          {likes && (
+            <>
+              <TouchableOpacity>
+                <View style={styles.infoItem}>
                   <Feather
                     name='thumbs-up'
                     size={24}
@@ -42,22 +47,23 @@ export default function PostsItem({
                       '#535352d2'
                     }
                   />
-                </TouchableOpacity>
-                <Text>{countLikes}</Text>
-              </>
-            )}
-          </View>
+                  <Text>{countLikes}</Text>
+                </View>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
-        <View style={[styles.infoItem]}>
-          <TouchableOpacity>
-            <SimpleLineIcons
-              name='location-pin'
-              size={24}
-              color='#BDBDBD'
-            />
-          </TouchableOpacity>
-          <Text style={[styles.text, styles.loc]}>Location</Text>
-        </View>
+        <TouchableOpacity
+          style={[styles.infoItem]}
+          onPress={toMap}
+        >
+          <SimpleLineIcons
+            name='location-pin'
+            size={24}
+            color='#BDBDBD'
+          />
+          <Text style={[styles.text, styles.loc]}>{location}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

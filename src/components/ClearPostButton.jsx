@@ -2,7 +2,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-export default function ClearPostButton({ handleClearForm, reset }) {
+export default function ClearPostButton({ handleClearForm }) {
   return (
     <View>
       <TouchableOpacity

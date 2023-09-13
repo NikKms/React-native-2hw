@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  Image,
+} from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
 import ClearPostButton from './ClearPostButton';
 import CreatePostButton from './CreatePostButton';
 import CreatePostPhotoWrapper from './CreatePostPhotoWrapper';
+import UploadPhoto from './UploadPhoto';
+import { addToData } from '../common/data';
+import { v4 as uuidv4 } from 'uuid';
 
 const baseFontSize = 16;
 const screenHeight = Dimensions.get('window').height;
@@ -16,19 +27,42 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function CreatePostForm() {
-  const [uploadPhoto, setUploadPhoto] = useState(null);
+  const [photo, setPhoto] = useState('');
+  const [location, setLocation] = useState('');
 
-  const handleUploadPhoto = newPhoto => {
-    setUploadPhoto(prevPhoto => (prevPhoto ? null : newPhoto));
-  };
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const coords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 50.417323,
+        longitudeDelta: 30.490069,
+      };
+      setLocation(coords);
+    })();
+  }, []);
 
   const handleClearForm = resetForm => {
-    setUploadPhoto(null);
     resetForm();
+    setPhoto('');
+    setLocation('');
   };
 
   const handleSubmitForm = values => {
     console.log('values photo', values);
+    console.log('photo', photo);
+    console.log('location:', location);
+    addToData({
+      photo,
+      postName: values.infoPhoto,
+      location: values.locPhoto,
+    });
   };
 
   return (
@@ -39,6 +73,9 @@ export default function CreatePostForm() {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
+        if (location) {
+          values.location = location;
+        }
         handleSubmitForm(values);
         resetForm();
       }}
@@ -46,10 +83,18 @@ export default function CreatePostForm() {
       {({ values, handleChange, handleSubmit, errors, touched, resetForm }) => (
         <View style={styles.container}>
           <View>
-            <CreatePostPhotoWrapper
-              handleUploadPhoto={handleUploadPhoto}
-              uploadPhoto={uploadPhoto}
-            />
+            <View style={styles.imageContainer}>
+              {photo ? (
+                <Image
+                  source={{ uri: photo }}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <CreatePostPhotoWrapper setPhoto={setPhoto} />
+              )}
+            </View>
+
+            <UploadPhoto setPhoto={setPhoto} />
           </View>
 
           <View style={styles.formField}>
@@ -87,8 +132,9 @@ export default function CreatePostForm() {
           >
             <View>
               <CreatePostButton
-                uploadPhoto={uploadPhoto}
+                photo={photo}
                 values={values.infoPhoto}
+                location={values.locPhoto}
                 handleSubmit={handleSubmit}
               />
             </View>
@@ -109,6 +155,13 @@ const styles = StyleSheet.create({
     gap: screenHeight * 0.03,
     paddingVertical: screenHeight * 0.04,
     flex: 1,
+  },
+  imageContainer: {
+    overflow: 'hidden',
+    height: screenHeight * 0.35,
+    backgroundColor: '#F6F6F6',
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   formField: {
     gap: screenHeight * 0.01,

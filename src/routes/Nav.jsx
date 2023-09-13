@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthNav from './AuthNav';
 import MainTabs from './MainTabs';
+import MapSceen from '../Screens/MapScreen';
+import CommentsScreen from '../Screens/CommentsScreen';
 
 const MainStack = createStackNavigator();
 
@@ -15,11 +17,21 @@ export default function Nav() {
           options={{ headerShown: false }}
           component={AuthNav}
         />
-        <MainStack.Screen
-          name='Home'
-          options={{ headerShown: false }}
-          component={MainTabs}
-        />
+        <>
+          <MainStack.Screen
+            name='Home'
+            options={{ headerShown: false }}
+            component={MainTabs}
+          />
+          <MainStack.Screen
+            name='Map'
+            component={MapSceen}
+          />
+          <MainStack.Screen
+            name='Comment'
+            component={CommentsScreen}
+          />
+        </>
       </MainStack.Navigator>
     </NavigationContainer>
   );

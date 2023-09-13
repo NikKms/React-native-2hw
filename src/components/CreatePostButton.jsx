@@ -1,22 +1,33 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function CreatePostButton({
-  uploadPhoto,
+  photo,
   values,
   handleSubmit,
+  location,
 }) {
+  const navigation = useNavigation();
+
   return (
     <View>
       <TouchableOpacity
-        style={[styles.btn, (!uploadPhoto || !values) && styles.btnDisabled]}
-        disabled={!uploadPhoto || !values}
-        onPress={handleSubmit}
+        style={[
+          styles.btn,
+          (!photo || !values || !location) && styles.btnDisabled,
+        ]}
+        disabled={!photo || !values || !location}
+        onPress={() => {
+          handleSubmit();
+          navigation.navigate('PostsScreen');
+          console.log('Add to flat list in PostScreens');
+        }}
       >
         <Text
           style={[
             styles.btnText,
-            (!uploadPhoto || !values) && styles.btnTextDisabled,
+            (!photo || !values || !location) && styles.btnTextDisabled,
           ]}
         >
           Зберегти
