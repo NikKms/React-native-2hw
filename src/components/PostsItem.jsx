@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather, SimpleLineIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 export default function PostsItem({
-  countComents = 0,
+  countComents,
   countLikes,
   likes,
   photo,
@@ -16,7 +16,7 @@ export default function PostsItem({
   return (
     <View style={styles.container}>
       <Image
-        source={photo} /*source={{uri:photo}}*/
+        source={photo} /* source={{ uri: photo }} */
         style={styles.image}
       />
       <Text style={[styles.text, {}]}>{postName}</Text>
@@ -27,14 +27,12 @@ export default function PostsItem({
               <Feather
                 name='message-circle'
                 size={24}
-                color={
-                  // isCommented ? '#FF6C00' :
-                  '#535352d2'
-                }
+                color={countComents ? '#FF6C00' : '#535352d2'}
               />
-              <Text>{countComents}</Text>
+              {countComents && <Text>{countComents}</Text>}
             </View>
           </TouchableOpacity>
+
           {likes && (
             <>
               <TouchableOpacity>
@@ -42,12 +40,9 @@ export default function PostsItem({
                   <Feather
                     name='thumbs-up'
                     size={24}
-                    color={
-                      // isLiked ? '#FF6C00' :
-                      '#535352d2'
-                    }
+                    color={likes ? '#FF6C00' : '#535352d2'}
                   />
-                  <Text>{countLikes}</Text>
+                  {countLikes && <Text>{countLikes}</Text>}
                 </View>
               </TouchableOpacity>
             </>
@@ -62,7 +57,7 @@ export default function PostsItem({
             size={24}
             color='#BDBDBD'
           />
-          <Text style={[styles.text, styles.loc]}>{location}</Text>
+          <Text style={[styles.text, styles.loc]}>{location.locPhoto}</Text>
         </TouchableOpacity>
       </View>
     </View>

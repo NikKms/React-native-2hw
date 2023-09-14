@@ -25,10 +25,38 @@ export default function Nav() {
           />
           <MainStack.Screen
             name='Map'
+            options={{
+              title: 'Геолокація',
+              headerTitleAlign: 'center',
+              headerStyle: {
+                backgroundColor: '#fff',
+                borderBottomWidth: 1,
+                borderColor: '#00000028',
+              },
+              headerTitleStyle: {
+                color: '#212121',
+                fontFamily: 'Roboto-Medium',
+                fontSize: 17,
+              },
+            }}
             component={MapSceen}
           />
           <MainStack.Screen
             name='Comment'
+            options={{
+              title: 'Коментарі',
+              headerTitleAlign: 'center',
+              headerStyle: {
+                backgroundColor: '#fff',
+                borderBottomWidth: 1,
+                borderColor: '#00000028',
+              },
+              headerTitleStyle: {
+                color: '#212121',
+                fontFamily: 'Roboto-Medium',
+                fontSize: 17,
+              },
+            }}
             component={CommentsScreen}
           />
         </>

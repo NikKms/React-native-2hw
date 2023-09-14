@@ -17,7 +17,15 @@ export const data = [
     countComents: 5,
     countLikes: 10,
     likes: true,
-    location: 'Ivano-Frankivsk',
+    location: {
+      locPhoto: 'Ivano-Frankivsk',
+      coords: {
+        latitude: 48.9226,
+        longitude: 24.7111,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+      },
+    },
   },
   {
     id: 2,
@@ -26,6 +34,14 @@ export const data = [
     countComents: 3,
     countLikes: 7,
     likes: false,
-    location: 'Odessa',
+    location: {
+      locPhoto: 'Odessa',
+      coords: {
+        latitude: 46.4825,
+        longitude: 30.7233,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+      },
+    },
   },
 ];

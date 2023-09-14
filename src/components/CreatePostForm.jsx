@@ -16,7 +16,6 @@ import CreatePostButton from './CreatePostButton';
 import CreatePostPhotoWrapper from './CreatePostPhotoWrapper';
 import UploadPhoto from './UploadPhoto';
 import { addToData } from '../common/data';
-import { v4 as uuidv4 } from 'uuid';
 
 const baseFontSize = 16;
 const screenHeight = Dimensions.get('window').height;
@@ -41,8 +40,8 @@ export default function CreatePostForm() {
       const coords = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 50.417323,
-        longitudeDelta: 30.490069,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
       };
       setLocation(coords);
     })();
@@ -61,7 +60,10 @@ export default function CreatePostForm() {
     addToData({
       photo,
       postName: values.infoPhoto,
-      location: values.locPhoto,
+      location: {
+        locPhoto: values.locPhoto,
+        coords: location,
+      },
     });
   };
 

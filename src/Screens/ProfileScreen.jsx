@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bg: {
-    flex: 1,
+    // flex: 1,
   },
   imageBackground: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'flex-end',
   },
 });

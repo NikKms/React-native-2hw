@@ -20,11 +20,12 @@ export default function PostsList() {
           photo={item.photo}
           location={item.location}
           postName={item.postName}
+          id={item.id}
           toComments={() => {
-            navigation.navigate('Comment');
+            navigation.navigate('Comment', { postId: item.id });
           }}
           toMap={() => {
-            navigation.navigate('Map');
+            navigation.navigate('Map', item);
           }}
         />
       )}
