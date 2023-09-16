@@ -3,11 +3,14 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import CreatePostForm from '../components/CreatePostForm';
 
 export default function CreatePostsScreen() {
+
   return (
     <ScrollView
       style={{ flex: 1 }}

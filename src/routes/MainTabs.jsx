@@ -88,10 +88,9 @@ export default function MainTabs() {
           title: 'Створити публікацію',
           headerTitleAlign: 'center',
           tabBarStyle: { display: 'none' },
-          unmountOnBlur: true,
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate('PostsScreen')}
               style={{ marginLeft: 10 }}
             >
               <Ionicons

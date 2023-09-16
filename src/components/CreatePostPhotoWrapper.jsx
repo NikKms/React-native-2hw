@@ -9,13 +9,15 @@ import {
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import Loader from './Loader';
 
 const screenHeight = Dimensions.get('window').height;
 
-const CreatePostPhotoWrapper = ({ setPhoto }) => {
+const CreatePostPhotoWrapper = ({ setPhoto, setLoadedPhoto, loadedPhoto }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+
 
   useEffect(() => {
     (async () => {
@@ -40,8 +42,13 @@ const CreatePostPhotoWrapper = ({ setPhoto }) => {
         quality: 0.3,
       });
 
-      await MediaLibrary.createAssetAsync(uri);
-      setPhoto(uri);
+      try {
+        setLoadedPhoto(true)
+        await MediaLibrary.createAssetAsync(uri);
+        setPhoto(uri);
+      } catch (error) {
+        error.messame
+      } finally { setLoadedPhoto(false) }
     }
   };
 
@@ -52,38 +59,45 @@ const CreatePostPhotoWrapper = ({ setPhoto }) => {
     return <Text>No access to camera</Text>;
   }
 
+
+
   return (
     <View style={styles.container}>
-      <Camera
-        style={styles.camera}
-        type={type}
-        ref={setCameraRef}
-      >
-        <TouchableOpacity
-          style={styles.flipContainer}
-          onPress={flipCamera}
+      {!loadedPhoto
+        ? <Camera
+          style={styles.camera}
+          type={type}
+          ref={setCameraRef}
         >
-          <Ionicons
-            name='camera-reverse'
-            size={24}
-            color='white'
-          />
-        </TouchableOpacity>
-        <View style={styles.photoView}>
           <TouchableOpacity
-            style={styles.button}
-            onPress={takePhoto}
+            style={styles.flipContainer}
+            onPress={flipCamera}
           >
-            <View style={styles.takePhotoInner}>
-              <MaterialIcons
-                name='photo-camera'
-                size={24}
-                color='#BDBDBD'
-              />
-            </View>
+            <Ionicons
+              name='camera-reverse'
+              size={24}
+              color='white'
+            />
           </TouchableOpacity>
-        </View>
-      </Camera>
+          <View style={styles.photoView}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={takePhoto}
+            >
+              <View style={styles.takePhotoInner}>
+                <MaterialIcons
+                  name='photo-camera'
+                  size={24}
+                  color='#BDBDBD'
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </Camera> : <>
+          <Loader size={84} color={'black'} />
+          <Text>Завантаження....</Text>
+        </>
+      }
     </View>
   );
 };
@@ -91,8 +105,11 @@ const CreatePostPhotoWrapper = ({ setPhoto }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 8,
     overflow: 'hidden',
+    backgroundColor: "#E8E8E8"
   },
   camera: {
     flex: 1,
@@ -123,3 +140,6 @@ const styles = StyleSheet.create({
 });
 
 export default CreatePostPhotoWrapper;
+
+
+

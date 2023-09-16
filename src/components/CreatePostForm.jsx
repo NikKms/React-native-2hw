@@ -28,6 +28,8 @@ const validationSchema = Yup.object().shape({
 export default function CreatePostForm() {
   const [photo, setPhoto] = useState('');
   const [location, setLocation] = useState('');
+  const [loadedPhoto, setLoadedPhoto] = useState(false)
+
 
   useEffect(() => {
     (async () => {
@@ -92,11 +94,11 @@ export default function CreatePostForm() {
                   style={{ width: '100%', height: '100%' }}
                 />
               ) : (
-                <CreatePostPhotoWrapper setPhoto={setPhoto} />
+                <CreatePostPhotoWrapper setPhoto={setPhoto} setLoadedPhoto={setLoadedPhoto} loadedPhoto={loadedPhoto} />
               )}
             </View>
 
-            <UploadPhoto setPhoto={setPhoto} />
+            <UploadPhoto setPhoto={setPhoto} setLoadedPhoto={setLoadedPhoto} loadedPhoto={loadedPhoto} />
           </View>
 
           <View style={styles.formField}>

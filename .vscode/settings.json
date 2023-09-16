@@ -1,4 +1,16 @@
 {
   "prettier.useTabs": false,
-  "reactSnippets.settings.prettierEnabled": true
+  "reactSnippets.settings.prettierEnabled": true,
+  "prettier.bracketSpacing": true,
+  "prettier.endOfLine": "lf",
+  "prettier.proseWrap": "preserve",
+  "prettier.quoteProps": "as-needed",
+  "prettier.requireConfig": false,
+  "prettier.resolveGlobalModules": false,
+  "prettier.trailingComma": "es5",
+  "prettier.useEditorConfig": true,
+  "prettier.vueIndentScriptAndStyle": false,
+  "prettier.withNodeModules": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.autoSave": "onFocusChange"
 }
